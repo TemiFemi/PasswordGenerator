@@ -17,7 +17,18 @@ generateBtn.addEventListener("click", function () {
     while (passwordLength >= 8 || passwordLength <= 128) {
         var passwordPrompt = prompt("Please enter the amount of chracters that you will like in your password.Your password must be at leat 8 Characters long and no longer than 128 characters");
 
-    };
+    }
+    console.log(passwordLength)
+    var caseUpper = false;
+    var caseLower = false;
+    var num = false;
+    var charSpec = false;
+    while (!caseUpper && !caseLower && !num && !charSpec) {
+        var caseUpper = prompt("Would you like uppercase characters in your password?")
+        var caseLower = prompt("Would you like lowercase characters in your password? ")
+        var num = prompt("Would you like number characters in your password?")
+        var charSpec = promt("Would you like special characters in your password?")
+    }
 }
 )
 
