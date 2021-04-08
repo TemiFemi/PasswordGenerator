@@ -26,15 +26,12 @@ function writePassword() {
 
 generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
-    //document.getElementById("pword").innerHTML=""
     lengthPassword();
     lowercaseFunction();
     uppercaseFunction();
     specCharFunction();
     numFunction();
 }
-
-
 function lengthPassword() {
 
     passwordLength = prompt("Please enter the amount of chracters that you will like in your password.Your password must be at least 8 Characters long and no longer than 128 characters");
@@ -43,15 +40,14 @@ function lengthPassword() {
     if (!passwordLength) {
         return;
     };
-    if (passwordLength === " " || isNaN(passwordLength) || passwordLength < 8 || passwordLength > 129) {
+    if (passwordLength === " " || isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
         alert("The password length is not acceptable, please try again");
-        generatePassword()
     };
 }
 
 function lowercaseFunction() {
     lowercasePrompt = confirm("Would you like your password to include lowercase letter?")
-    //lowercasePrompt = lowercasePrompt.toUpperCase();
+    lowercasePrompt = lowercasePrompt.toUpperCase();
 
     if (!lowercasePrompt) {
         return;
@@ -87,7 +83,6 @@ function specCharFunction() {
 }
 
 function numFunction() {
-
     numberPrompt = confirm("Would you like your password to include numbers?")
 
     if (!numberPrompt) {
