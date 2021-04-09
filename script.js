@@ -1,17 +1,19 @@
 
 // Add event listener to generate button
 
-var upperCase = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
+var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-var lowerCase = "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+var lowerCase = "abcdefghijklmnopqrstuvwxyz"
 
-var number = "12345678910";
+var numbers = "1234567890";
 
-var specChar = "! @ # $ % ^ & * ( ) _ - = +";
+var specChar = "!@#$%^&*()_-=+";
 
 var passwordLength = 0;
 
 var lowercasePrompt = "";
+
+var charactersLists = [];
 
 
 var generateBtn = document.querySelector("#generate");
@@ -27,11 +29,26 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
     //document.getElementById("pword").innerHTML=""
-    lengthPassword();
-    lowercaseFunction();
-    uppercaseFunction();
-    specCharFunction();
-    numFunction();
+    var password = "";
+    var isValidLength = lengthPassword();
+    if (isValidLength) {
+
+        var useLowerCase = lowercaseFunction();
+        if (useLowerCase) charactersLists.push(lowerCase)
+        var useUpperCase = uppercaseFunction();
+        if (useUpperCase) charactersLists.push(upperCase)
+        var useSpecChar = specCharFunction();
+        if (useSpecChar) charactersLists.push(specChar)
+        var useNumbers = numFunction();
+        if (useNumbers) charactersLists.push(numbers)
+        for (var i = 0; i < passwordLength; i++) {
+            var randomIndex = Math.floor(Math.random() * charactersLists.length)
+            var characterArray = charactersLists[randomIndex]
+            var randomIndex2 = Math.floor(Math.random() * characterArray.length)
+            password += characterArray[randomIndex2]
+        }
+    }
+    return password;
 }
 
 
@@ -41,62 +58,38 @@ function lengthPassword() {
 
 
     if (!passwordLength) {
-        return;
+        return false;
     };
     if (passwordLength === " " || isNaN(passwordLength) || passwordLength < 8 || passwordLength > 129) {
         alert("The password length is not acceptable, please try again");
-        generatePassword()
+        return false;
     };
+    return true
 }
 
 function lowercaseFunction() {
     lowercasePrompt = confirm("Would you like your password to include lowercase letter?")
     //lowercasePrompt = lowercasePrompt.toUpperCase();
 
-    if (!lowercasePrompt) {
-        return;
-    }
-    if (lowercasePrompt !== true && lowercasePrompt !== false) {
-        alert("Please enter Yes or No")
-    }
+    return lowercasePrompt;
 }
 
 function uppercaseFunction() {
     uppercasePrompt = confirm("Would you like your password to include uppercase letter?")
 
-    if (!uppercasePrompt) {
-        return;
-    };
-
-    if (uppercasePrompt !== true && uppercasePrompt !== false) {
-        alert("Please enter Yes or No")
-
-    }
+    return uppercasePrompt;
 }
 
 function specCharFunction() {
     specialCharPrompt = confirm("Would you like your password to include special characters?")
 
-    if (!specialCharPrompt) {
-        return;
-    }
-
-    if (specialCharPrompt !== true && specialCharPrompt !== false) {
-        alert("Please enter Yes or No")
-    }
+    return specialCharPrompt;
 }
 
 function numFunction() {
 
     numberPrompt = confirm("Would you like your password to include numbers?")
 
-    if (!numberPrompt) {
-        return;
-    }
-
-    if (numberPrompt !== true && numberPrompt !== false) {
-        alert("Please enter Yes or No")
-
-    }
+    return numberPrompt;
 }
 
